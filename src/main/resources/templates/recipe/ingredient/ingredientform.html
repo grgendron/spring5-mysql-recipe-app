@@ -30,12 +30,22 @@
                         </div>
                         <div class="panel-body">
 
-
+        <!-- since BaseIngredient, need to replace textfield with a combo-box
                             <div class="row">
                                 <div class="col-md-3 form-group">
                                     <label>Description:</label>
-                                    <input type="text" class="form-control" th:field="*{description}"/>
+                                    <input type="text" class="form-control" th:field="*{baseIngredient.description}"/>
                                 </div>
+        -->
+                            <div class="col-md-3 form-group">
+                                <label>Ingredient:</label>
+                                <select class="form-control" name="baseIngredient.id">
+                                    <option th:each="biEach : ${baseIngredientList}"
+                                            th:value="${biEach.id}"
+                                            th:selected="${biEach.id.equals(ingredient.baseIngredient.id)}"
+                                            th:text="${biEach.description}">Each</option>
+                                </select>
+                            </div>
 
                                 <div class="col-md-3 form-group">
                                     <label>Amount:</label>
@@ -55,7 +65,7 @@
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
+<!--                </div>-->
             </form>
         </div>
     </div>

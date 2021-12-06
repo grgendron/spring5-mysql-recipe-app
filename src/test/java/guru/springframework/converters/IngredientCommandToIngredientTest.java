@@ -2,6 +2,7 @@ package guru.springframework.converters;
 
 import guru.springframework.commands.IngredientCommand;
 import guru.springframework.commands.UnitOfMeasureCommand;
+import guru.springframework.domain.BaseIngredient;
 import guru.springframework.domain.Ingredient;
 import guru.springframework.domain.Recipe;
 import org.junit.Before;
@@ -15,7 +16,7 @@ public class IngredientCommandToIngredientTest {
 
     public static final Recipe RECIPE = new Recipe();
     public static final BigDecimal AMOUNT = new BigDecimal("1");
-    public static final String DESCRIPTION = "Cheeseburger";
+    public static final BaseIngredient BASIC_INGREDIENT = new BaseIngredient("Cheeseburger");
     public static final Long ID_VALUE = new Long(1L);
     public static final Long UOM_ID = new Long(2L);
 
@@ -42,7 +43,7 @@ public class IngredientCommandToIngredientTest {
         IngredientCommand command = new IngredientCommand();
         command.setId(ID_VALUE);
         command.setAmount(AMOUNT);
-        command.setDescription(DESCRIPTION);
+        command.setBaseIngredient(BASIC_INGREDIENT);
         UnitOfMeasureCommand unitOfMeasureCommand = new UnitOfMeasureCommand();
         unitOfMeasureCommand.setId(UOM_ID);
         command.setUom(unitOfMeasureCommand);
@@ -55,7 +56,7 @@ public class IngredientCommandToIngredientTest {
         assertNotNull(ingredient.getUom());
         assertEquals(ID_VALUE, ingredient.getId());
         assertEquals(AMOUNT, ingredient.getAmount());
-        assertEquals(DESCRIPTION, ingredient.getDescription());
+        assertEquals(BASIC_INGREDIENT, ingredient.getBaseIngredient());
         assertEquals(UOM_ID, ingredient.getUom().getId());
     }
 
@@ -65,7 +66,7 @@ public class IngredientCommandToIngredientTest {
         IngredientCommand command = new IngredientCommand();
         command.setId(ID_VALUE);
         command.setAmount(AMOUNT);
-        command.setDescription(DESCRIPTION);
+        command.setBaseIngredient(BASIC_INGREDIENT);
         UnitOfMeasureCommand unitOfMeasureCommand = new UnitOfMeasureCommand();
 
 
@@ -77,7 +78,7 @@ public class IngredientCommandToIngredientTest {
         assertNull(ingredient.getUom());
         assertEquals(ID_VALUE, ingredient.getId());
         assertEquals(AMOUNT, ingredient.getAmount());
-        assertEquals(DESCRIPTION, ingredient.getDescription());
+        assertEquals(BASIC_INGREDIENT, ingredient.getBaseIngredient());
     }
 
 }

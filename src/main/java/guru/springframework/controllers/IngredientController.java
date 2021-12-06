@@ -3,6 +3,7 @@ package guru.springframework.controllers;
 import guru.springframework.commands.IngredientCommand;
 import guru.springframework.commands.RecipeCommand;
 import guru.springframework.commands.UnitOfMeasureCommand;
+import guru.springframework.services.BaseIngredientService;
 import guru.springframework.services.IngredientService;
 import guru.springframework.services.RecipeService;
 import guru.springframework.services.UnitOfMeasureService;
@@ -22,11 +23,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class IngredientController {
 
     private final IngredientService ingredientService;
+    private final BaseIngredientService baseIngredientService;
     private final RecipeService recipeService;
     private final UnitOfMeasureService unitOfMeasureService;
 
-    public IngredientController(IngredientService ingredientService, RecipeService recipeService, UnitOfMeasureService unitOfMeasureService) {
+    public IngredientController(IngredientService ingredientService,
+                                BaseIngredientService baseIngredientService,
+                                RecipeService recipeService,
+                                UnitOfMeasureService unitOfMeasureService) {
         this.ingredientService = ingredientService;
+        this.baseIngredientService = baseIngredientService;
         this.recipeService = recipeService;
         this.unitOfMeasureService = unitOfMeasureService;
     }
@@ -74,6 +80,7 @@ public class IngredientController {
         model.addAttribute("ingredient", ingredientService.findByRecipeIdAndIngredientId(Long.valueOf(recipeId), Long.valueOf(id)));
 
         model.addAttribute("uomList", unitOfMeasureService.listAllUoms());
+        model.addAttribute("baseIngredientList",baseIngredientService.listAllBaseIngredients());
         return "recipe/ingredient/ingredientform";
     }
 

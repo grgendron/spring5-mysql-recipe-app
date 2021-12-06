@@ -1,6 +1,7 @@
 package guru.springframework.converters;
 
 import guru.springframework.commands.IngredientCommand;
+import guru.springframework.domain.BaseIngredient;
 import guru.springframework.domain.Ingredient;
 import guru.springframework.domain.Recipe;
 import guru.springframework.domain.UnitOfMeasure;
@@ -18,7 +19,7 @@ public class IngredientToIngredientCommandTest {
 
     public static final Recipe RECIPE = new Recipe();
     public static final BigDecimal AMOUNT = new BigDecimal("1");
-    public static final String DESCRIPTION = "Cheeseburger";
+    public static final BaseIngredient BASIC_INGREDIENT = new BaseIngredient("Cheeseburger");
     public static final Long UOM_ID = new Long(2L);
     public static final Long ID_VALUE = new Long(1L);
 
@@ -47,7 +48,7 @@ public class IngredientToIngredientCommandTest {
         ingredient.setId(ID_VALUE);
         ingredient.setRecipe(RECIPE);
         ingredient.setAmount(AMOUNT);
-        ingredient.setDescription(DESCRIPTION);
+        ingredient.setBaseIngredient(BASIC_INGREDIENT);
         ingredient.setUom(null);
         //when
         IngredientCommand ingredientCommand = converter.convert(ingredient);
@@ -55,7 +56,7 @@ public class IngredientToIngredientCommandTest {
         assertNull(ingredientCommand.getUom());
         assertEquals(ID_VALUE, ingredientCommand.getId());
         assertEquals(AMOUNT, ingredientCommand.getAmount());
-        assertEquals(DESCRIPTION, ingredientCommand.getDescription());
+        assertEquals(BASIC_INGREDIENT, ingredientCommand.getBaseIngredient());
     }
 
     @Test
@@ -65,7 +66,7 @@ public class IngredientToIngredientCommandTest {
         ingredient.setId(ID_VALUE);
         ingredient.setRecipe(RECIPE);
         ingredient.setAmount(AMOUNT);
-        ingredient.setDescription(DESCRIPTION);
+        ingredient.setBaseIngredient(BASIC_INGREDIENT);
 
         UnitOfMeasure uom = new UnitOfMeasure();
         uom.setId(UOM_ID);
@@ -79,6 +80,6 @@ public class IngredientToIngredientCommandTest {
         assertEquals(UOM_ID, ingredientCommand.getUom().getId());
         // assertEquals(RECIPE, ingredientCommand.get);
         assertEquals(AMOUNT, ingredientCommand.getAmount());
-        assertEquals(DESCRIPTION, ingredientCommand.getDescription());
+        assertEquals(BASIC_INGREDIENT, ingredientCommand.getBaseIngredient());
     }
 }

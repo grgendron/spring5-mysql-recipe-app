@@ -1,0 +1,21 @@
+logging:
+  level:
+    guru.springframework: debug
+    org.hibernate: warn
+
+#    setting spring.datasource.platform to 'h2' should cause resources/data-h2.sql to run
+spring:
+  datasource:
+    platform: h2
+    url: jdbc:h2:mem:testdb
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+
+  jpa:
+#    hibernate:
+#      ddl-auto: update
+    database-platform: org.hibernate.dialect.H2Dialect
+    database: h2
+    show-sql: true
+

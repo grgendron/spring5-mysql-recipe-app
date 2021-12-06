@@ -79,7 +79,7 @@ public class IngredientServiceImpl implements IngredientService {
 
             if(ingredientOptional.isPresent()){
                 Ingredient ingredientFound = ingredientOptional.get();
-                ingredientFound.setDescription(command.getDescription());
+                ingredientFound.setBaseIngredient(command.getBaseIngredient());
                 ingredientFound.setAmount(command.getAmount());
                 ingredientFound.setUom(unitOfMeasureRepository
                         .findById(command.getUom().getId())
@@ -101,7 +101,7 @@ public class IngredientServiceImpl implements IngredientService {
             if(!savedIngredientOptional.isPresent()){
                 //not totally safe... But best guess
                 savedIngredientOptional = savedRecipe.getIngredients().stream()
-                        .filter(recipeIngredients -> recipeIngredients.getDescription().equals(command.getDescription()))
+                        .filter(recipeIngredients -> recipeIngredients.getBaseIngredient().equals(command.getBaseIngredient()))
                         .filter(recipeIngredients -> recipeIngredients.getAmount().equals(command.getAmount()))
                         .filter(recipeIngredients -> recipeIngredients.getUom().getId().equals(command.getUom().getId()))
                         .findFirst();
