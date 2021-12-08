@@ -1,5 +1,5 @@
 spring:
   profiles:
-    active: h2
+    active: dev
   datasource:
-    platform: h2
+    platform: dev
